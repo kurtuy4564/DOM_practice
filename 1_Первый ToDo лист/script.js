@@ -9,12 +9,30 @@ function renderTasks() {
 
   localStorage.setItem('tasks', JSON.stringify(tasks))
 
-  if (inputSearchTask.value.length) {
-    tasks
-      .filter(el => el.text.includes(inputSearchTask.value))
-      .forEach(task => {
-        createTaskElement(task)
+  if (inputSearchTask.value.length || filterSelect.value !== 'all') {
+    const filtered = tasks
+      .filter(el => {
+        if (filterSelect.value === 'all') {
+          return true
+        }
+        if (filterSelect.value === 'complete') {
+          return el.completed
+        }
+        if (filterSelect.value === 'incomplete') {
+          return !el.completed
+        }
+        return true
       })
+      .filter(el => el.text.toLowerCase().includes(inputSearchTask.value.toLowerCase()))
+
+    if (filtered.length === 0) {
+      tasksContainer.innerHTML = '<div class="empty-message">Упс, пусто...</div>'
+      return
+    }
+
+    filtered.forEach(task => {
+      createTaskElement(task)
+    })
     return
   }
 
@@ -34,15 +52,15 @@ function createTaskElement(task) {
   taskElement.dataset.id = task.id
 
   taskElement.innerHTML = `
-            <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : ''} />
-            <div class="task-content">
-                <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
-            </div>
-            <div class="icons">
-              <img src="icons/pencil.svg" alt="Редактировать" width="24" height="24" aria-hidden="true"/>
-              <img src="icons/trash-2.svg" alt="Удалить" width="24" height="24" aria-hidden="true"/>
-            </div>
-        `
+  <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : ''} />
+  <div class="task-content">
+  <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+  </div>
+  <div class="icons">
+  <img src="icons/pencil.svg" alt="Редактировать" width="24" height="24" aria-hidden="true"/>
+  <img src="icons/trash-2.svg" alt="Удалить" width="24" height="24" aria-hidden="true"/>
+  </div>
+  `
 
   tasksContainer.appendChild(taskElement)
   attachTaskHandlers(taskElement, task.id)
@@ -50,6 +68,8 @@ function createTaskElement(task) {
 }
 
 const inputSearchTask = document.getElementById('inputSearchTask')
+const buttunClearSearch = document.getElementById('clearSearch')
+const filterSelect = document.getElementById('filterSelect')
 
 const inputTask = document.getElementById('taskInput')
 const modalActionButton = document.getElementById('addButton')
@@ -90,8 +110,13 @@ modalCloseButton.onclick = function () {
 }
 
 modalActionButton.addEventListener('click', handleModalAction)
+buttunClearSearch.addEventListener('click', () => {
+  inputSearchTask.value = ''
+  renderTasks()
+})
 
 inputSearchTask.addEventListener('input', renderTasks)
+filterSelect.addEventListener('change', renderTasks)
 
 function createTask() {
   const taskText = inputTask.value.trim()
