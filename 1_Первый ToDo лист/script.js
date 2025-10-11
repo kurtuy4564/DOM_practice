@@ -1,3 +1,8 @@
+const modal = $.modal({
+  title: 'Добавить задачу',
+  textButton: 'Добавить',
+})
+
 let tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,7 +31,7 @@ function renderTasks() {
       .filter(el => el.text.toLowerCase().includes(inputSearchTask.value.toLowerCase()))
 
     if (filtered.length === 0) {
-      tasksContainer.innerHTML = '<div class="empty-message">Упс, пусто...</div>'
+      tasksContainer.innerHTML = '<div class="empty-message">Упс, пусто</div>'
       return
     }
 
