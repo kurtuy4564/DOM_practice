@@ -1,11 +1,10 @@
-.vmodal {}
-
-.vmodal.open .modal {
+.vmodal.open .modal .vmodal.open .modal-content {
   opacity: 1;
   z-index: 1000;
 }
 
-.modal {
+.vmodal.hide .modal,
+.vmodal.hide .modal-content {
   opacity: 0;
   z-index: -1;
 }

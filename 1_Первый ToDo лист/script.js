@@ -1,9 +1,36 @@
-const modal = $.modal({
+const modalAddTask = $.modal({
   title: 'Добавить задачу',
   textButton: 'Добавить',
+  actionButton: function () {
+    createTask()
+  },
 })
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+const modalEditTask = $.modal({
+  title: 'Редактировать задачу',
+  textButton: 'Сохранить',
+  actionButton: function (value, modal) {
+    if (typeof value !== 'string' || value.trim() === '') {
+      alert('Пожалуйста, введите задачу')
+      return
+    }
+
+    const task = tasks.find(t => t.id === currentEditingTaskId)
+    if (!task) {
+      currentEditingTaskId = null
+      modal.close()
+      return
+    }
+
+    task.text = value.trim()
+    currentEditingTaskId = null
+    modal.close()
+    renderTasks()
+  },
+})
+
+let localStorageTasks = localStorage.getItem('tasks')
+let tasks = localStorageTasks ? JSON.parse(localStorageTasks) : []
 
 document.addEventListener('DOMContentLoaded', () => {
   renderTasks()
@@ -76,7 +103,6 @@ const inputSearchTask = document.getElementById('inputSearchTask')
 const buttunClearSearch = document.getElementById('clearSearch')
 const filterSelect = document.getElementById('filterSelect')
 
-const inputTask = document.getElementById('taskInput')
 const modalActionButton = document.getElementById('addButton')
 const tasksContainer = document.getElementById('todoList')
 
@@ -86,35 +112,10 @@ const modalHeaderTitle = document.getElementById('modalTitle')
 const modalCloseButton = document.getElementById('buttonCloseModal')
 let currentEditingTaskId = null
 
-function setModalState(mode) {
-  if (modalHeaderTitle)
-    modalHeaderTitle.textContent = mode === 'edit' ? 'Редактировать задачу' : 'Добавить задачу'
-  if (modalActionButton) modalActionButton.textContent = mode === 'edit' ? 'Сохранить' : 'Добавить'
-}
-
-function showModal(mode = 'add', text = '', taskId = null) {
-  currentEditingTaskId = mode === 'edit' ? taskId : null
-  inputTask.value = text
-  setModalState(mode)
-  if (modalEl) modalEl.style.display = 'block'
-  inputTask.focus()
-}
-
-function hideModal() {
-  if (modalEl) modalEl.style.display = 'none'
-  currentEditingTaskId = null
-  setModalState('add')
-}
-
 openAddModalButton.onclick = function () {
-  showModal('add', '')
+  modalAddTask.open()
 }
 
-modalCloseButton.onclick = function () {
-  hideModal()
-}
-
-modalActionButton.addEventListener('click', handleModalAction)
 buttunClearSearch.addEventListener('click', () => {
   inputSearchTask.value = ''
   renderTasks()
@@ -124,11 +125,10 @@ inputSearchTask.addEventListener('input', renderTasks)
 filterSelect.addEventListener('change', renderTasks)
 
 function createTask() {
-  const taskText = inputTask.value.trim()
+  const taskText = modalAddTask.getValue().trim()
 
   if (taskText === '') {
     alert('Пожалуйста, введите задачу')
-    inputTask.focus()
     return
   }
 
@@ -144,27 +144,29 @@ function createTask() {
   tasks.push(newTask)
 
   renderTasks()
-  inputTask.value = ''
-  hideModal()
+  modalAddTask.close()
 }
 
 function handleModalAction() {
-  const text = inputTask.value.trim()
+  const task = tasks.find(t => t.id === currentEditingTaskId)
+  console.log(task)
+
+  const text = modalEditTask.EditValue(task.text).trim()
+
   if (text === '') {
     alert('Пожалуйста, введите задачу')
     return
   }
 
   if (currentEditingTaskId) {
-    const task = tasks.find(t => t.id === currentEditingTaskId)
     if (!task) {
       currentEditingTaskId = null
-      hideModal()
+      modalEditTask.close()
       return
     }
     task.text = text
     currentEditingTaskId = null
-    hideModal()
+    modalEditTask.close()
     renderTasks()
     return
   }
@@ -182,7 +184,6 @@ function attachTaskHandlers(taskElement, taskId) {
   if (checkbox) {
     checkbox.addEventListener('change', () => {
       const taskIndex = tasks.findIndex(t => t.id === taskId)
-
       tasks[taskIndex].completed = !tasks[taskIndex].completed
       renderTasks()
     })
@@ -192,7 +193,9 @@ function attachTaskHandlers(taskElement, taskId) {
     editImg.addEventListener('click', () => {
       const task = tasks.find(t => t.id === taskId)
       if (!task) return
-      showModal('edit', task.text, taskId)
+      currentEditingTaskId = taskId
+      modalEditTask.EditValue(task.text)
+      modalEditTask.open()
     })
   }
 
