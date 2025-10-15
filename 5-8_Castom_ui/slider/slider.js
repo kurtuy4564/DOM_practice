@@ -14,13 +14,14 @@
   const mainImg = document.querySelector('.slider__main-img')
   const lastImg = document.querySelector('.slider__last-img')
 
+  const dotsContainer = document.querySelector('.slider__dots')
+
   document.addEventListener('DOMContentLoaded', () => {
     render()
   })
 
   function render() {
     mainImg.src = srcImageList[currentIndexImg]
-
     if (currentIndexImg < 1) {
       firstImg.src = './images/white.png'
     } else {
@@ -32,6 +33,13 @@
     } else {
       lastImg.src = srcImageList[currentIndexImg + 1]
     }
+
+    dotsContainer.innerHTML = ''
+    srcImageList.forEach((el, index) => {
+      const dot = document.createElement('div')
+      dot.className = `dot ${index === currentIndexImg ? 'dot--current' : ''}`
+      dotsContainer.appendChild(dot)
+    })
   }
 
   firstImg.addEventListener('click', () => {
@@ -40,6 +48,7 @@
     currentIndexImg--
     render()
   })
+
   lastImg.addEventListener('click', () => {
     if (currentIndexImg > srcImageList.length - 2) return
 
