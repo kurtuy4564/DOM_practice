@@ -112,6 +112,7 @@ const modalHeaderTitle = document.getElementById('modalTitle')
 const modalCloseButton = document.getElementById('buttonCloseModal')
 let currentEditingTaskId = null
 
+
 openAddModalButton.onclick = function () {
   modalAddTask.open()
 }
@@ -206,3 +207,13 @@ function attachTaskHandlers(taskElement, taskId) {
     })
   }
 }
+
+
+
+const buttonDeleteAll = document.querySelector('.btn-delete-all')
+
+buttonDeleteAll.addEventListener('click', e => {
+  tasks.length = 0
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  renderTasks()
+})
