@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Contact Us</h1>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label>Query Type *</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="queryType" value="1" required />
+              <span class="radio-custom"></span>
+              General Enquiry
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="queryType" value="2" required />
+              <span class="radio-custom"></span>
+              Support Request
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-option">
+            <input type="checkbox" id="consent" name="consent" required />
+            <span class="checkbox-custom"></span>
+            I consent to being contacted by the team *
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </body>
+  <script src="main.js"></script>
+</html>
