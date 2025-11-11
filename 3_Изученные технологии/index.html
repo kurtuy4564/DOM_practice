@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Изученные технологии</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./plugins/modal.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>Ваш прогресс</h1>
+        <div class="progress-bar"></div>
+        <div class="technology-container">
+        </div>
+
+      </div>
+
+      <div>
+        <h2>Добавить технологию</h2>
+        <div>
+          <div>
+            <div>Название</div>
+            <input type="text" placeholder="Введите название" name="technology-name" class="technology-name"/>
+          </div>
+          <div>
+            <div>Описание</div>
+            <textarea
+              class="technology-description"
+              name="technology-description"
+              placeholder="Введите описание"
+              rows="4"
+              cols="50"
+            ></textarea>
+          </div>
+          <button class="btn-create">Создать</button>
+        </div>
+      <div>
+    </div>
+  </body>
+  <script src="/base.js"></script>
+  <script src="/plugins/modal.js"></script>
+  <script src="/main.js"></script>
+</html>

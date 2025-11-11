@@ -1,0 +1,52 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+input,
+textarea,
+button {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f6f4f4;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  background: #f6f4f4;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  width: 100%;
+  height: 30px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.progress-line{
+  height: 100%;
+  background: #c5fbbf;
+  position: absolute;
+  top: 0;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f6f4f4;
+  padding: 7px 10px;
+}
+
+.card.is-complete {
+  background: #c5fbbf;
+}
+
+.technology-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
