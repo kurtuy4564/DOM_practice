@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="plugins/modal.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>TODO LIST</h1>
+      </div>
+      <div class="search-bar">
+        <div class="search-input">
+          <img
+            class="search-icon"
+            src="icons/search.svg"
+            alt="Поиск"
+            aria-hidden="true"
+            width="18"
+            height="18"
+          />
+          <input id="inputSearchTask" type="text" placeholder="Поиск задачи..." />
+          <img
+            class="clear-icon"
+            id="clearSearch"
+            src="icons/x.svg"
+            alt="Очистить"
+            aria-hidden="true"
+            width="14"
+            height="14"
+          />
+        </div>
+        <div class="filter-select">
+          <select id="filterSelect" class="all-button">
+            <option value="all">All</option>
+            <option value="complete">Complete</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+        <button class="btn-delete-all">delete all</button>
+      </div>
+      <div id="todoList" class="todo-list">
+        <div class="todo-item"></div>
+      </div>
+      <div class="open-modal">
+        <button id="openModal">+</button>
+      </div>
+    </div>
+
+    <!-- <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="buttonCloseModal">×</span>
+        <h2 id="modalTitle">Добавить задачу</h2>
+        <div>
+          <div>Задача:</div>
+          <input type="text" id="taskInput" />
+          <button id="addButton">Добавить</button>
+        </div>
+      </div>
+    </div> -->
+  </body>
+  <script src="base.js"></script>
+  <script src="plugins/modal.js"></script>
+  <script src="script.js"></script>
+</html>
