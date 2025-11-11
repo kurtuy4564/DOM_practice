@@ -1,0 +1,41 @@
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.slider img {
+  height: 200px;
+  width: 150px;
+  object-fit: cover;
+}
+
+.slider .slider__main-img {
+  height: 250px;
+  width: 200px;
+}
+
+.slider__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d3d3d3;
+}
+
+.dot--current {
+  width: 24px;
+  border-radius: 10px;
+  background: #3D5AF1;
+}

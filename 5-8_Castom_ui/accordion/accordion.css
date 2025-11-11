@@ -1,0 +1,49 @@
+.accordion {
+  border: 1px solid #d3d3d3;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0px 20px 50px 0px #0000001f;
+  margin: 30px 0;
+
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 24px;
+}
+
+.accordion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.accordion-img {
+  transform: rotate(180deg);
+}
+
+.accordion-item-content {
+  padding: 30px;
+  border-top: 1px solid #d3d3d3;
+
+  font-family: Inter;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.accordion-button {
+  height: 42;
+  border-radius: 3px;
+  background: #ff8a00;
+  padding: 8px 18px;
+  color: white;
+  margin-top: 20px;
+  border: none;
+
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 18px;
+}

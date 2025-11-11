@@ -1,0 +1,20 @@
+.select {
+  border: 2px solid #b8bbc2;
+  border-radius: 10px;
+  width: 260px;
+}
+
+.select-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 18px;
+}
+
+.select-item {
+  padding: 11px 18px;
+}
+
+.current {
+  background: #C4CBDF;
+}
